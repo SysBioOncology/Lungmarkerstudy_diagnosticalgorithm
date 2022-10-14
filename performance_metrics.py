@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Nov 20 11:22:26 2019
-
-@author: s154758
+Compute the performance (sensitivity, specificity, PPV and NPV) at a specific probability threshold
 """
 
 def performance_metrics(probability_threshold,y_pred,y_true):
-    #Determine the sensitivity, specificity, PPV and NPV
     import numpy as np
     TP = 0.0
     TN = 0.0
