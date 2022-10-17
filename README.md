@@ -16,7 +16,7 @@ The code can be used for 2 purposes:
   - Recursive feature elimination
   - Training using the 'optimal' set of markers
 
-![Pipeline_logreg](Pipeline_logistic_regression.png)
+![Pipeline_logreg](Pipeline_logistic_regression.PNG)
 
 - Applying the models from the articles to new patients for predicting of probabilities
 
