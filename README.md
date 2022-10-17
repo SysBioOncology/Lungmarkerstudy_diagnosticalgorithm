@@ -16,7 +16,7 @@ The code can be used for 2 purposes:
   - Recursive feature elimination
   - Training using the 'optimal' set of markers
 
-![Logisticregression_pipeline](Pipeline logistic regression.png)
+![Logisticregression_pipeline](https://github.com/SysBioOncology//Lungmarkerstudy_diagnosticalgorithm/Pipeline_logistic_regression.png)
 
 - Applying the models from the articles to new patients for predicting of probabilities
 
