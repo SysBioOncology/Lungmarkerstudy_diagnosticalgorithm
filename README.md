@@ -15,5 +15,8 @@ The code can be used for 2 purposes:
 - Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
   - Recursive feature elimination
   - Training using the 'optimal' set of markers
+
+![Logisticregression_pipeline](Pipeline logistic regression.png)
+
 - Applying the models from the articles to new patients for predicting of probabilities
 
