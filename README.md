@@ -13,10 +13,14 @@ Output data used in the 3 different classification tasks were:
 
 The code can be used for 2 purposes:
 - Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
-  - Recursive feature elimination
+ 
   - Training using the 'optimal' set of markers
 
 ![Pipeline_logreg](Pipeline_logistic_regression.PNG)
 
+  - The optimal set of protein TMs was determined using recursive feature elimination. This pipeline is similar to the previous logistic regression pipeline, except that the x most important features will be selected per cross-validation fold. These models were run for x = 1 to 8 (n_features_to_select) and the performances were compared to determine the best performance. 
+  
+![Pipeline_logreg_RFE](Pipeline_logistic_regression_RFE.png)  
+  
 - Applying the models from the articles to new patients for predicting of probabilities
 
