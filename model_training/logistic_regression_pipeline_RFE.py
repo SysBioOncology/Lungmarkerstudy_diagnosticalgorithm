@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Jan 27 10:36:03 2020
-
-@author: s154758
-"""
 
 def logistic_regression_pipeline_RFE(X, y, names_TMs, cnt_var, names_classes, solver, n_features_to_select):
     import pandas as pd
