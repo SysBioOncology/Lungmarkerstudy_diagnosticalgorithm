@@ -11,7 +11,7 @@ Output data used in the 3 different classification tasks were:
 2) No NSCLC (= no LC + SCLC) (class 0) vs. NSCLC (class 1)
 3) No SCLC (= no LC + NSCLC) (class 0) vs. SCLC (class 1)
 
-*NOTE*: Due to privacy/ethical restrictions, the data used in this paper is not publically available. We added example files with dummy data (no patient data) to show how the input files should be structured. These input files can be altered using own data.   
+*NOTE*: Due to privacy/ethical restrictions, the data used in this paper is not publically available. We added example files with random dummy data (no patient data) to show how the input files should be structured. These input files can be altered using own data.   
 
 The code can be used for 2 purposes:
 - Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
