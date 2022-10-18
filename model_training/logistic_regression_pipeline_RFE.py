@@ -190,8 +190,7 @@ def logistic_regression_pipeline_RFE(X, y, names_TMs, cnt_var, names_classes, so
     #Compute the percentage of cross-validation folds for which a patient is classified in class 1, while in the validation set
     percentage_class_one = sum(predicted_class.transpose())/(n_splits/5)*100   
 
-    #return(prob_y_val, coefficients, probabilities, performance_val, performances_per_threshold_val, prob_thresholds, performances_train, predicted_class, predicted_prob, val_indices, performances_per_threshold_train, percentage_class_one, predicted_prob_train, logregs, scalers)
-
+   
     return(performances_per_threshold_val, performance_val, predicted_prob, predicted_class, 
            percentage_class_one, y_pred_val_percv, y_pred_class_percv,
            performances_per_threshold_train, performances_train, predicted_prob_train, 
