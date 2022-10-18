@@ -15,13 +15,16 @@ Output data used in the 3 different classification tasks were:
 
 The code can be used for 2 purposes:
 - Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
-  - *main_file_training_models.py*: Main file to define the input variables and output variable for the training of the logistic regression models.  
+  - *main_file_training_models.py*: This file can be used to run the logistic regression pipeline. Moreover, this file is used to define the input variables and output variable for the training of the logistic regression models. The definitions of the variables returned by the logistic regression models are described.   
     - The variable *problem* can be changed to define the output variable (lines 27-29)
     - Line 42 *X = X.loc[:,'...']* can be changed to use a subset of all input variables
     - Line 47 *cnt_var = ['...']* defines the continuous variables and should be adjusted if only a subset of the input variables is used
-  - *logistic_regression_pipeline.py*: Training of the logistic regression models, as performed in the paper on the individual markers and using the 'optimal' set of markers. These models were all adjusted for age and sex, by using these variables as input variables as well. 
+  - *logistic_regression_pipeline.py*: Training of the logistic regression models, as performed in the paper on the individual markers and using the 'optimal' set of markers. These models were all adjusted for age and sex, by using these variables as input variables as well. The outline of the pipeline can be seen in the Figure below:
 
   ![Pipeline_logreg](Pipeline_logistic_regression.PNG)
+  
+  - *main_file_training_RFE.py*: 
+  
   - *logistic_regression_pipeline_RFE.py*: The optimal set of protein TMs was determined using recursive feature elimination. This pipeline is similar to the previous logistic regression pipeline, except that the x most important features will be selected per cross-validation fold. These models were run for x = 1 to 8 (n_features_to_select) and the performances were compared to determine the best performance. 
   
   ![Pipeline_logreg_RFE](Pipeline_logistic_regression_RFE.png)  
