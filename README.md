@@ -16,7 +16,7 @@ Output data used in the 3 different classification tasks were:
 The code can be used for 2 purposes:
 - Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
   - *main_file_training_models.py*: This file can be used to run the logistic regression pipeline. Moreover, this file is used to define the input variables and output variable for the training of the logistic regression models. The definitions of the variables returned by the logistic regression models are described.   
-    - The variable *problem* can be changed to define the output variable (lines 27-29)
+    - The variable *problem* can be changed to define the output variable (lines 27-29) (LC of classification problem 1, NSCLC for classification problem 2, and SCLC for classification problem 3)
     - Line 42 *X = X.loc[:,'...']* can be changed to use a subset of all input variables
     - Line 47 *cnt_var = ['...']* defines the continuous variables and should be adjusted if only a subset of the input variables is used
   - *logistic_regression_pipeline.py*: Training of the logistic regression models, as performed in the paper on the individual markers and using the 'optimal' set of markers. These models were all adjusted for age and sex, by using these variables as input variables as well. The outline of the pipeline can be seen in the Figure below:
