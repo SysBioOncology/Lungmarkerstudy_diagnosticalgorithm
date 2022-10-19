@@ -53,7 +53,13 @@ Training models with the same logistic regression pipeline using own input featu
 - Applying the models from the articles to new patients for predicting of probabilities
 
 
-##Packages
+## Package versions
 
-Python 3.8.8
+- python version 3.8.8
+- matplotlib 3.3.4
+- pandas 1.2.4
+- numpy 1.20.1
+- seaborn 0.11.1
+- sklearn 0.24.1
+
 
