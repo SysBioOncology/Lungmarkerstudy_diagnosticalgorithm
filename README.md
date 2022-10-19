@@ -19,7 +19,7 @@ The code can be used for 2 purposes:
 
 ### Training of the models
 Training models with the same logistic regression pipeline using own input features: files are stored in the folder *model_training*
-  - *Example_data_train_model.xlsx*: An example of the structure of the dataset used to run the Python files. The data shown in this table was randomly generated and is thus no real patient data. For using own data to run the models, use the same structure of the file. 
+  - *Example_data_train_model.xlsx*: An example of the structure of the dataset used to run the Python files. **NOTE**: The data shown in this table was randomly generated and is thus no real patient data. For using own data to run the models, use the same structure of the file. 
   - *main_file_training_models.py*: This file can be used to run the logistic regression pipeline. Moreover, this file is used to define the input variables and output variable for the training of the logistic regression models. The definitions of the variables returned by the logistic regression models are described.   
     - The variable *problem* can be changed to define the output variable (lines 27-29) (**LC** of classification problem 1, **NSCLC** for classification problem 2, and **SCLC** for classification problem 3)
     - Line 42 *X = X.loc[:,'...']* can be changed to use a subset of all input variables
@@ -47,10 +47,11 @@ Training models with the same logistic regression pipeline using own input featu
 
 ### Model predictions on new patients
 
-  
-  
-  
-- Applying the models from the articles to new patients for predicting of probabilities
+The trained models for identification of LC, NSCLC and SCLC are provided to run the models using new patient data. The probabilities of having LC, NSCLC or SCLC will be predicted, together with the classes when using the probability thresholds where the training sets reached the pre-set PPVs. The models use either the optimal combination of protein TMs, as described in the paper, or the protein TMs and the DNA TMs. 
+
+- *Example_data_run_models.xlsx*: An example of the structure of the dataset used to run the Python files. It is possible to run the models with or without known diagnosis (LC, NSCLC, SCLC) of the patient. In the case where the diagnosis is provided, the performance of the predictions will be provided (sensitivity, specificity, PPV, NPV and ROC-AUC). **NOTE**: The data shown in this table was randomly generated and is thus no real patient data. 
+- *main_file_running_own_data.py*: This file can be used to run the logistic regression models to retrieve predictions for new patients. 
+
 
 
 ## Package versions
