@@ -52,3 +52,8 @@ Training models with the same logistic regression pipeline using own input featu
   
 - Applying the models from the articles to new patients for predicting of probabilities
 
+
+##Packages
+
+Python 3.8.8
+
