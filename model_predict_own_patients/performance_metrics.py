@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Esther Visser
 Determine the sensitivity, specificity, PPV and NPV
 """
 
