@@ -31,12 +31,15 @@ problem = 'LC' #no LC vs. LC (with PPV >= 98%)
 if problem == 'LC':
     names_classes = ['No lung cancer','Primary lung carcinoma']
     y = y_primary
+    ppv_aim = 0.98
 elif problem == 'NSCLC':
     names_classes = ['No lung cancer + SCLC','NSCLC']
-    y = y_nsclc
+    y = y_nsclc    
+    ppv_aim = 0.95
 elif problem == 'SCLC':
     names_classes = ['No lung cancer + NSCLC','SCLC']    
     y = y_sclc
+    ppv_aim = 0.95
 
 #Define what input variables will be used in the model
 X = X.loc[:,['CA125','CA15.3','CEA','CYFRA 21-1','HE4','NSE','proGRP','SCCA','cfDNA','Age','ctDNA','Sex']]
@@ -70,7 +73,51 @@ logregs, scalers] = logistic_regression_pipeline(X, y, names_TMs, cnt_var, names
 #logregs: save the trained logistic regression models for all 5-folds x 200 repetitions
 #scalers: save the trained StandardScaler for all 5-folds x 200 repetitions
 
+#The pre-set PPV could not always be met in the training set. If this is the case,
+#determine the performance of the validation set only for the training sets where the
+#pre-set PPV was met. Also save the folds of other variables where this 
+#criteria was met. 
+n_splits = len(logregs)
+if sum(sum(performances_per_threshold_train[:,2,:]>=ppv_aim)>0) < n_splits:
+    logregs_above_thresh = []
+    scalers_above_thresh = []
+    prob_thresholds_above_thresh = []
+    val_indices_above_thresh = []
+    y_pred_class_percv_above_thresh = []
+    y_pred_val_percv_above_thresh = []
+    for i in range(0,len(logregs)):
+        if sum(performances_per_threshold_train[:,2,i]>=ppv_aim)>0:
+            logregs_above_thresh.append(logregs[i])
+            scalers_above_thresh.append(scalers[i])
+            prob_thresholds_above_thresh.append(prob_thresholds[i])
+            val_indices_above_thresh.append(val_indices[i])
+            y_pred_class_percv_above_thresh.append(y_pred_class_percv[i])
+            y_pred_val_percv_above_thresh.append(y_pred_val_percv[i])
 
+    
+    performance_val_above_thresh = performance_val[sum(performances_per_threshold_train[:,2,:]>=ppv_aim)>0]
+    print('CV-folds where training set could meet pre-set PPV: %3.1f%%' %(len(performance_val_above_thresh)/len(performance_val)*100.0))
+    print('Performances for these CV-folds:')
+    for i in ['Sens val','Spec val','PPV val','NPV val','AUC val']:
+        print('%s: %3.3f (%3.3f - %3.3f)' %(i,performance_val_above_thresh.loc[:,i].median(), performance_val_above_thresh.loc[:,i].quantile(q = 0.25),performance_val_above_thresh.loc[:,i].quantile(q = 0.75)))
+
+    #Save the predicted probabilities and classes only for the CV-folds where the training
+    #set met the pre-set PPV criterium
+    predicted_class_above_thresh = np.ones((len(y), n_splits))*np.nan
+    predicted_prob_above_thresh = np.ones((len(y), n_splits))*np.nan
+    
+    for i in range(0,len(val_indices_above_thresh)):
+        predicted_class_above_thresh[val_indices_above_thresh[i],i] = y_pred_class_percv_above_thresh[i]
+        predicted_prob_above_thresh[val_indices_above_thresh[i],i] = y_pred_val_percv_above_thresh[i]
+    
+    #Compute the percentage that a patient was classified as class one for these CV-folds
+    percentage_class_one_above_thresh = []
+    for i in range(0,len(percentage_class_one)):
+        percentage_class_one_above_thresh.append(sum(predicted_class_above_thresh[i,:] == 1)/(n_splits-sum(np.isnan(predicted_class_above_thresh[i,:])))*100.0)
+
+    #Save the coefficients of the models where the PPV criterium was met
+    coefficients_above_thresh = coefficients[sum(performances_per_threshold_train[:,2,:]>=ppv_aim)>0]
+    
 #Plot the average ROC-curve, computed using vertical averaging
 [mean_fprs, mean_tprs, std_tprs, tprs_upper, tprs_lower, 
  median_auc, lower_iqr_auc, upper_iqr_auc, aucs] = ROC_curves_with_confidence_interval(performances_per_threshold_val, np)
