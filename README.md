@@ -55,7 +55,13 @@ The trained models for identification of LC, NSCLC and SCLC are provided to run 
     - Lines 30 - 32: Define the classification *problem* that will be addressed by the model (identification of LC, NSCLC or SCLC)
     - Lines 35 - 36: Define the combination of input variables (*input_combination*): the combination of protein TMs or protein + DNA TMs. The optimal combinations for each classification problem as described in the paper will be used.  
 **NOTE**: The only a subset of the models for SCLC could achieve the pre-set PPV of 95% for the training set, only these models are provided.
-
+**NOTE**: Do not change the order of the lines X = X.loc[:,...] and cnt_var = ..., otherwise the trained models do not match the input variables. 
+- *logistic_regression_pipeline_predictnewpatients*: Pipeline to compute the probabilities and classes of new patients, using the previously trained standard scaling, logistic regression models and probability thresholds to achieve the pre-set PPVs. 
+- *performance_metrics.py*: Determine the performance metrics (sensitivity, specificity, PPV and NPV) at a certain probability threshold
+- *ROC_curve_with_confidence_interval.py*: Determine the average ROC-curve by performing vertical averaging
+- *logregs_....pkl*: The trained logistic regression models
+- *scalers_....pkl*: The StandardScalers trained by the mean and standard deviation of the training set
+- *prob_thresholds_....pkl*: The probability thresholds used to determine the classes. At these thresholds, the training set could reach a PPV of 95 or 98%.
 
 
 ## Package versions
